@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="./dist/css/style.css" rel="stylesheet" type="text/css" />
+    <script
+      src="../../../node_modules/bootstrap/dist/js/bootstrap.bundle.js"
+      defer
+      type="module"
+    ></script>
+    <script src="./src/script/pages/home.mjs" defer type="module"></script>
+    <title>Les Petits Plats</title>
+  </head>
+  <body class="bg-light">
+    <header class="container p-5">
+      <div class="row pb-96">
+        <div class="col">
+          <a href="."
+            ><img
+              class="logo"
+              src="./assets/images/Logo.png"
+              alt="Les Petits Plats logo"
+          /></a>
+        </div>
+      </div>
+      <div class="row pt-96 pb-4 justify-content-center">
+        <div class="col-lg-7">
+          <p class="h1 text-primary text-center text-uppercase">
+            Cherchez parmi plus de 1500 recettes du quotidien, simples et
+            délicieuses
+          </p>
+        </div>
+      </div>
+      <div class="row pt-1 pb-98 justify-content-center">
+        <div class="col-lg-8">
+          <div class="input-group">
+            <input
+              class="test form-control px-92 py-4 rounded-start-3"
+              type="text"
+              placeholder="Rechercher une recette, un ingrédient, ..."
+              aria-label="Rechercher une recette, un ingrédient, ... example"
+            />
+            <button type="button" class="btn bg-body">X</button>
+            <div
+              class="bg-body rounded-end-3 d-flex justify-content-center align-items-center p-91"
+            >
+              <button type="button" class="search btn btn-dark rounded-3">
+                <i class="bi bi-search fs-3"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main class="container"></main>
+  </body>
+</html>

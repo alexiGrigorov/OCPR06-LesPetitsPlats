@@ -1,0 +1,31 @@
+// Include any default variable overrides here (though functions won't be available)
+$headings-font-family: "Anton", sans-serif;
+$font-family-sans-serif: "Manrope", sans-serif;
+$primary: #ffd15b;
+$secondary: #7a7a7a;
+$dark: #1b1b1b;
+$light: #ededed;
+
+$body-secondary-color: $secondary;
+
+$spacer: 1rem !default;
+$spacers: (
+  0: 0,
+  1: $spacer * 0.25,
+  2: $spacer * 0.5,
+  3: $spacer,
+  4: $spacer * 1.5,
+  5: $spacer * 3,
+  91: $spacer * 0.69,
+  92: $spacer * 2.19,
+  96: $spacer * 5.25,
+  98: $spacer * 8.75,
+);
+
+$border-radius-lg: 11px;
+$border-radius-xl: 21px;
+
+@import "../../../node_modules/bootstrap/scss/bootstrap";
+
+$bootstrap-icons-font-dir: "../../assets/fonts";
+@import "../../../node_modules/bootstrap-icons/font/bootstrap-icons.scss";

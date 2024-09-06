@@ -1,0 +1,86 @@
+@use "../composition/bootstrap" as Bootstrap;
+
+.filter {
+  & .accordion {
+    --bs-accordion-border-radius: #{Bootstrap.$border-radius-lg};
+  }
+
+  & .accordion-button:not(.collapsed) {
+    box-shadow: none;
+  }
+
+  & .accordion-body > * + * {
+    margin-top: 1.5rem !important;
+  }
+}
+
+.filter-search-bar {
+  > * {
+    border-style: none;
+  }
+
+  &-clear {
+    font-size: 6px;
+  }
+
+  &-button {
+    --bs-btn-focus-shadow-rgb: 255, 209, 91;
+    --bs-btn-active-color: #000;
+    --bs-btn-active-bg: #{Bootstrap.$primary};
+    --bs-btn-active-border-color: #{Bootstrap.$primary};
+    --bs-btn-hover-border-color: #{Bootstrap.$primary};
+    --bs-btn-hover-bg: none;
+  }
+}
+
+.filter-active-criteria > button {
+  --bs-list-group-bg: #{Bootstrap.$primary};
+  --bs-list-group-action-hover-bg: var(--bs-list-group-bg);
+  --bs-list-group-action-active-bg: var(--bs-list-group-bg);
+
+  & > .bi-x-circle-fill {
+    display: none;
+  }
+
+  &:hover,
+  &:focus-visible {
+    outline: 0;
+    font-weight: bold;
+
+    & > .bi-x-circle-fill {
+      display: block;
+    }
+  }
+
+  &:focus-visible {
+    box-shadow: 0 0 0 0.25rem
+      rgba(
+        mix(black, Bootstrap.$primary, Bootstrap.$btn-hover-bg-shade-amount),
+        0.5
+      );
+  }
+}
+
+.filter-possible-criteria > button {
+  --bs-list-group-border-width: 0;
+
+  &:hover,
+  &:focus-visible {
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem
+      rgba(
+        mix(black, Bootstrap.$primary, Bootstrap.$btn-hover-bg-shade-amount),
+        0.5
+      );
+  }
+
+  &:active {
+    --bs-list-group-action-active-bg: #{Bootstrap.$primary};
+    box-shadow: none;
+    font-weight: bold;
+  }
+}
+
+.total-recipes {
+  padding-top: 1rem;
+}

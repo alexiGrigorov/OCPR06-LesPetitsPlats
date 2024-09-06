@@ -18,12 +18,19 @@ $spacers: (
   5: $spacer * 3,
   91: $spacer * 0.69,
   92: $spacer * 2.19,
+  93: $spacer * 3.75,
+  95: $spacer * 4.125,
   96: $spacer * 5.25,
+  97: $spacer * 6.25,
   98: $spacer * 8.75,
 );
 
 $border-radius-lg: 11px;
 $border-radius-xl: 21px;
+
+$accordion-button-active-color: inherit;
+$accordion-button-active-bg: none;
+$accordion-icon-active-color: #212529;
 
 @import "../../../node_modules/bootstrap/scss/bootstrap";
 

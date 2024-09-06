@@ -2,21 +2,35 @@
 
 header {
   position: relative;
+
+  width: 100%;
+  height: auto;
+
   background-image: url("../../assets/images/lampos-aritonang-24gR_9lCdes-unsplash.jpg"),
     linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3));
   background-blend-mode: overlay;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  width: 100%;
-  height: auto;
 }
 
 .logo {
   width: 207px;
 }
 
-.search {
+.hero-text {
+  text-wrap: balance;
+}
+
+.main-search-input {
+  border-right-color: transparent;
+}
+
+.main-search-clear {
+  font-size: 13px;
+}
+
+.main-search-button {
   --bs-btn-focus-shadow-rgb: 255, 209, 91;
   --bs-btn-active-color: #000;
   --bs-btn-active-bg: #{Bootstrap.$primary};

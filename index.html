@@ -12,11 +12,11 @@
     <script src="./src/script/pages/home.mjs" defer type="module"></script>
     <title>Les Petits Plats</title>
   </head>
-  <body class="bg-light">
-    <header class="container p-5">
-      <div class="row pb-96">
-        <div class="col">
-          <a href="."
+  <body class="[ bg-light ]">
+    <header class="hero [ p-5 container-fluid ]">
+      <div class="[ row | pb-96 ]">
+        <div class="[ col ]">
+          <a class="[ btn btn-link ]" href="."
             ><img
               class="logo"
               src="./assets/images/Logo.png"
@@ -24,35 +24,329 @@
           /></a>
         </div>
       </div>
-      <div class="row pt-96 pb-4 justify-content-center">
-        <div class="col-lg-7">
-          <p class="h1 text-primary text-center text-uppercase">
+      <div class="[ row justify-content-center | pt-96 pb-4 ]">
+        <div class="[ col-lg-7 ]">
+          <p class="hero-text [ h1 text-primary text-center text-uppercase ]">
             Cherchez parmi plus de 1500 recettes du quotidien, simples et
             délicieuses
           </p>
         </div>
       </div>
-      <div class="row pt-1 pb-98 justify-content-center">
-        <div class="col-lg-8">
-          <div class="input-group">
+      <div class="[ row justify-content-center | pt-1 pb-98 ]">
+        <div class="[ col-lg-7 ]">
+          <div class="[ input-group ]">
+            <!--  -->
             <input
-              class="test form-control px-92 py-4 rounded-start-3"
+              id="main-search-input"
+              class="main-search-input [ form-control | rounded-start-3 px-92 py-4 ]"
               type="text"
               placeholder="Rechercher une recette, un ingrédient, ..."
               aria-label="Rechercher une recette, un ingrédient, ... example"
             />
-            <button type="button" class="btn bg-body">X</button>
+            <!--  -->
             <div
-              class="bg-body rounded-end-3 d-flex justify-content-center align-items-center p-91"
+              class="[ d-flex justify-content-center align-items-center | p-91 | bg-body ]"
             >
-              <button type="button" class="search btn btn-dark rounded-3">
-                <i class="bi bi-search fs-3"></i>
+              <button
+                type="button"
+                id="main-search-clear"
+                class="main-search-clear [ btn-close ]"
+                aria-label="clear"
+              ></button>
+            </div>
+            <!--  -->
+            <div
+              class="[ d-flex justify-content-center align-items-center | rounded-end-3 p-91 | bg-body ]"
+            >
+              <button
+                id="main-search-button"
+                type="button"
+                class="main-search-button [ btn btn-dark | rounded-3 ]"
+              >
+                <i class="[ fs-3 | bi bi-search ]"></i>
               </button>
             </div>
           </div>
         </div>
       </div>
     </header>
-    <main class="container"></main>
+    <section class="search-details [ px-97 container ]">
+      <div class="[ row flex-column flex-xl-row gap-95 row-gap-3 | mt-4 ]">
+        <div class="[ col flex-md-grow-0 ]">
+          <div id="ingredients-filter" class="filter [ accordion ]">
+            <div class="[ accordion-item ]">
+              <p class="[ accordion-header ]">
+                <button
+                  class="[ accordion-button gap-95 | fw-medium ]"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#ingredients"
+                  aria-expanded="true"
+                  aria-controls="ingredients"
+                >
+                  Ingrédients
+                </button>
+              </p>
+              <div
+                id="ingredients"
+                class="[ collapse | accordion-collapse ] show"
+                data-bs-parent="#ingredients-filter"
+              >
+                <div class="[ accordion-body ]">
+                  <div
+                    class="filter-search-bar [ input-group | input-group-sm mb-4 border | fs-sm ]"
+                  >
+                    <input
+                      id="ingredient-search-input"
+                      class="[ form-control ]"
+                      type="text"
+                      placeholder=""
+                      aria-label="filter by ingredient"
+                      aria-describedby="ingredient-search-button"
+                    />
+                    <div
+                      class="[ d-flex justify-content-center align-items-center ]"
+                    >
+                      <button
+                        id="ingredient-search-clear"
+                        class="filter-search-bar-clear [ btn-close ]"
+                        type="button"
+                        aria-label="clear"
+                      ></button>
+                    </div>
+                    <button
+                      id="ingredient-search-button"
+                      class="filter-search-bar-button [ btn btn-outline-secondary ]"
+                      type="button"
+                    >
+                      <i class="[ bi bi-search ]"></i>
+                    </button>
+                  </div>
+
+                  <div
+                    id="ingredients-active-criteria"
+                    class="filter-active-criteria [ list-group | list-group-flush ]"
+                  >
+                    <button
+                      id="appliance-active-criterion-name"
+                      class="[ list-group-item d-flex | list-group-item-action ]"
+                      type="button"
+                    >
+                      active criterion
+                      <i class="[ ms-auto | bi bi-x-circle-fill ]"></i>
+                    </button>
+                  </div>
+                  <div
+                    id="ingredients-possible-criteria"
+                    class="filter-possible-criteria [ list-group | list-group-flush ]"
+                  >
+                    <button
+                      id="ingredient-possible-criterion-name"
+                      class="[ list-group-item | list-group-item-action ]"
+                      type="button"
+                    >
+                      possible criterion
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="[ col flex-md-grow-0 ]">
+          <div id="appliances-filter" class="filter [ accordion ]">
+            <div class="[ accordion-item ]">
+              <p class="[ accordion-header ]">
+                <button
+                  class="[ accordion-button gap-95 | fw-medium ]"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#appliances"
+                  aria-expanded="true"
+                  aria-controls="appliances"
+                >
+                  Appareils
+                </button>
+              </p>
+              <div
+                id="appliances"
+                class="[ collapse | accordion-collapse ] show"
+                data-bs-parent="#appliances-filter"
+              >
+                <div class="[ accordion-body ]">
+                  <div
+                    class="filter-search-bar [ input-group | input-group-sm mb-4 border | fs-sm ]"
+                  >
+                    <input
+                      id="appliance-search-input"
+                      class="[ form-control ]"
+                      type="text"
+                      placeholder=""
+                      aria-label="filter by appliance"
+                      aria-describedby="appliance-search-button"
+                    />
+                    <div
+                      class="[ d-flex justify-content-center align-items-center ]"
+                    >
+                      <button
+                        id="appliance-search-clear"
+                        class="filter-search-bar-clear [ btn-close ]"
+                        type="button"
+                        aria-label="clear"
+                      ></button>
+                    </div>
+                    <button
+                      id="appliance-search-button"
+                      class="filter-search-bar-button [ btn btn-outline-secondary ]"
+                      type="button"
+                    >
+                      <i class="[ bi bi-search ]"></i>
+                    </button>
+                  </div>
+
+                  <div
+                    id="appliances-active-criteria"
+                    class="filter-active-criteria [ list-group | list-group-flush ]"
+                  >
+                    <button
+                      id="appliance-active-criterion-name"
+                      class="[ list-group-item d-flex | list-group-item-action ]"
+                      type="button"
+                    >
+                      active criterion
+                      <i class="[ ms-auto | bi bi-x-circle-fill ]"></i>
+                    </button>
+                  </div>
+                  <div
+                    id="appliances-possible-criteria"
+                    class="filter-possible-criteria [ list-group | list-group-flush ]"
+                  >
+                    <button
+                      id="appliance-possible-criterion-name"
+                      class="[ list-group-item | list-group-item-action ]"
+                      type="button"
+                    >
+                      possible criterion
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="[ col flex-md-grow-0 ]">
+          <div id="utensils-filter" class="filter [ accordion ]">
+            <div class="[ accordion-item ]">
+              <p class="[ accordion-header ]">
+                <button
+                  class="[ accordion-button gap-95 | fw-medium ]"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#utensils"
+                  aria-expanded="true"
+                  aria-controls="utensils"
+                >
+                  Ustensiles
+                </button>
+              </p>
+              <div
+                id="utensils"
+                class="[ collapse | accordion-collapse ] show"
+                data-bs-parent="#utensils-filter"
+              >
+                <div class="[ accordion-body ]">
+                  <div
+                    class="filter-search-bar [ input-group | input-group-sm mb-4 border | fs-sm ]"
+                  >
+                    <input
+                      id="utensil-search-input"
+                      class="[ form-control ]"
+                      type="text"
+                      placeholder=""
+                      aria-label="filter by utensil"
+                      aria-describedby="utensil-search-button"
+                    />
+                    <div
+                      class="[ d-flex justify-content-center align-items-center ]"
+                    >
+                      <button
+                        id="utensil-search-clear"
+                        class="filter-search-bar-clear [ btn-close ]"
+                        type="button"
+                        aria-label="clear"
+                      ></button>
+                    </div>
+                    <button
+                      id="utensil-search-button"
+                      class="filter-search-bar-button [ btn btn-outline-secondary ]"
+                      type="button"
+                    >
+                      <i class="[ bi bi-search ]"></i>
+                    </button>
+                  </div>
+
+                  <div
+                    id="utensils-active-criteria"
+                    class="filter-active-criteria [ list-group | list-group-flush ]"
+                  >
+                    <button
+                      id="utensil-active-criterion-name"
+                      class="[ list-group-item d-flex | list-group-item-action ]"
+                      type="button"
+                    >
+                      active criterion
+                      <i class="[ ms-auto | bi bi-x-circle-fill ]"></i>
+                    </button>
+                  </div>
+                  <div
+                    id="utensils-possible-criteria"
+                    class="filter-possible-criteria [ list-group | list-group-flush ]"
+                  >
+                    <button
+                      id="utensil-possible-criterion-name"
+                      class="[ list-group-item | list-group-item-action ]"
+                      type="button"
+                    >
+                      possible criterion
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="[ col flex-grow d-flex | ms-auto ]">
+          <div class="total-recipes h5 ms-auto">
+            <span id="number-of-recipes">1500</span> recettes
+          </div>
+        </div>
+      </div>
+      <div id="search-criteria" class="[ row row-cols-auto gap-3 | mt-4 mb-8 ]">
+        <button
+          id="search-criterion-name"
+          class="[ btn btn-primary align-items-center | p-3 rounded-3 ]"
+          type="button"
+        >
+          <span>Coco dsfsdfsdf sdfsdf</span>
+          <i class="[ bi bi-x-lg | ms-93 ]"></i>
+        </button>
+        <button
+          id="search-criterion-name"
+          class="[ btn btn-primary align-items-center | p-3 rounded-3 ]"
+          type="button"
+        >
+          <span>Coco dslfhslfslifhliezfezfhzefzefuzef</span>
+          <i class="[ bi bi-x-lg | ms-93 ]"></i>
+        </button>
+        <button
+          id="search-criterion-name"
+          class="[ btn btn-primary align-items-center | p-3 rounded-3 ]"
+          type="button"
+        >
+          <span>Coco</span>
+          <i class="[ bi bi-x-lg | ms-93 ]"></i>
+        </button>
+      </div>
+    </section>
   </body>
 </html>

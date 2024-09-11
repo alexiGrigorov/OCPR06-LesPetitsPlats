@@ -35,7 +35,6 @@
       <div class="[ row justify-content-center | pt-1 pb-98 ]">
         <div class="[ col-lg-7 ]">
           <div class="[ input-group ]">
-            <!--  -->
             <input
               id="main-search-input"
               class="main-search-input [ form-control | rounded-start-3 px-92 py-4 ]"
@@ -43,7 +42,6 @@
               placeholder="Rechercher une recette, un ingrédient, ..."
               aria-label="Rechercher une recette, un ingrédient, ... example"
             />
-            <!--  -->
             <div
               class="[ d-flex justify-content-center align-items-center | p-91 | bg-body ]"
             >
@@ -54,7 +52,6 @@
                 aria-label="clear"
               ></button>
             </div>
-            <!--  -->
             <div
               class="[ d-flex justify-content-center align-items-center | rounded-end-3 p-91 | bg-body ]"
             >
@@ -72,50 +69,133 @@
     </header>
     <section class="search-details [ px-97 container ]">
       <div class="[ row flex-column flex-xl-row gap-95 row-gap-3 | mt-4 ]">
+        <template id="filter-template">
+          <div class="[ col flex-md-grow-0 ]">
+            <div id="CRITERIONs-filter" class="filter [ accordion ]">
+              <div class="[ accordion-item ]">
+                <p class="[ accordion-header ]">
+                  <button
+                    class="[ accordion-button gap-95 | fw-medium ]"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#CRITERIONs"
+                    aria-expanded="true"
+                    aria-controls="CRITERIONs"
+                  >
+                    Ingrédients
+                  </button>
+                </p>
+                <div
+                  id="CRITERIONs"
+                  class="[ collapse | accordion-collapse ] show"
+                  data-bs-parent="#CRITERIONs-filter"
+                >
+                  <div class="[ accordion-body ]">
+                    <div
+                      class="filter-search-bar [ input-group | input-group-sm mb-4 border | fs-sm ]"
+                    >
+                      <input
+                        id="CRITERION-search-input"
+                        class="[ form-control ]"
+                        type="text"
+                        placeholder=""
+                        aria-label="filter by CRITERION"
+                        aria-describedby="CRITERION-search-button"
+                      />
+                      <div
+                        class="[ d-flex justify-content-center align-items-center ]"
+                      >
+                        <button
+                          id="CRITERION-search-clear"
+                          class="filter-search-bar-clear [ btn-close ]"
+                          type="button"
+                          aria-label="clear"
+                        ></button>
+                      </div>
+                      <button
+                        id="CRITERION-search-button"
+                        class="filter-search-bar-button [ btn btn-outline-secondary ]"
+                        type="button"
+                      >
+                        <i class="[ bi bi-search ]"></i>
+                      </button>
+                    </div>
+
+                    <div
+                      id="CRITERIONs-active-criteria"
+                      class="filter-active-criteria [ list-group | list-group-flush ]"
+                    >
+                      <button
+                        id="appliance-active-criterion-name"
+                        class="[ list-group-item d-flex | list-group-item-action ]"
+                        type="button"
+                      >
+                        active criterion
+                        <i class="[ ms-auto | bi bi-x-circle-fill ]"></i>
+                      </button>
+                    </div>
+                    <div
+                      id="CRITERIONs-possible-criteria"
+                      class="filter-possible-criteria [ list-group | list-group-flush ]"
+                    >
+                      <button
+                        id="CRITERION-possible-criterion-name"
+                        class="[ list-group-item | list-group-item-action ]"
+                        type="button"
+                      >
+                        possible criterion
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </template>
         <div class="[ col flex-md-grow-0 ]">
-          <div id="ingredients-filter" class="filter [ accordion ]">
+          <div id="recipe-s-filter" class="filter [ accordion ]">
             <div class="[ accordion-item ]">
               <p class="[ accordion-header ]">
                 <button
                   class="[ accordion-button gap-95 | fw-medium ]"
                   type="button"
                   data-bs-toggle="collapse"
-                  data-bs-target="#ingredients"
+                  data-bs-target="#recipe-s"
                   aria-expanded="true"
-                  aria-controls="ingredients"
+                  aria-controls="recipe-s"
                 >
                   Ingrédients
                 </button>
               </p>
               <div
-                id="ingredients"
+                id="recipe-s"
                 class="[ collapse | accordion-collapse ] show"
-                data-bs-parent="#ingredients-filter"
+                data-bs-parent="#recipe-s-filter"
               >
                 <div class="[ accordion-body ]">
                   <div
                     class="filter-search-bar [ input-group | input-group-sm mb-4 border | fs-sm ]"
                   >
                     <input
-                      id="ingredient-search-input"
+                      id="recipe--search-input"
                       class="[ form-control ]"
                       type="text"
                       placeholder=""
-                      aria-label="filter by ingredient"
-                      aria-describedby="ingredient-search-button"
+                      aria-label="filter by recipe-"
+                      aria-describedby="recipe--search-button"
                     />
                     <div
                       class="[ d-flex justify-content-center align-items-center ]"
                     >
                       <button
-                        id="ingredient-search-clear"
+                        id="recipe--search-clear"
                         class="filter-search-bar-clear [ btn-close ]"
                         type="button"
                         aria-label="clear"
                       ></button>
                     </div>
                     <button
-                      id="ingredient-search-button"
+                      id="recipe--search-button"
                       class="filter-search-bar-button [ btn btn-outline-secondary ]"
                       type="button"
                     >
@@ -124,7 +204,7 @@
                   </div>
 
                   <div
-                    id="ingredients-active-criteria"
+                    id="recipe-s-active-criteria"
                     class="filter-active-criteria [ list-group | list-group-flush ]"
                   >
                     <button
@@ -137,11 +217,11 @@
                     </button>
                   </div>
                   <div
-                    id="ingredients-possible-criteria"
+                    id="recipe-s-possible-criteria"
                     class="filter-possible-criteria [ list-group | list-group-flush ]"
                   >
                     <button
-                      id="ingredient-possible-criterion-name"
+                      id="recipe--possible-criterion-name"
                       class="[ list-group-item | list-group-item-action ]"
                       type="button"
                     >
@@ -321,15 +401,17 @@
           </div>
         </div>
       </div>
-      <div id="search-criteria" class="[ row row-cols-auto gap-3 | mt-4 mb-8 ]">
-        <button
-          id="search-criterion-name"
-          class="[ btn btn-primary align-items-center | p-3 rounded-3 ]"
-          type="button"
-        >
-          <span>Coco dsfsdfsdf sdfsdf</span>
-          <i class="[ bi bi-x-lg | ms-93 ]"></i>
-        </button>
+      <div class="[ row row-cols-auto gap-3 | mt-4 ]">
+        <template>
+          <button
+            id="TYPE-NAME"
+            class="[ btn btn-primary align-items-center | p-3 rounded-3 ]"
+            type="button"
+          >
+            <span>NAME</span>
+            <i class="[ bi bi-x-lg | ms-93 ]"></i>
+          </button>
+        </template>
         <button
           id="search-criterion-name"
           class="[ btn btn-primary align-items-center | p-3 rounded-3 ]"
@@ -348,5 +430,56 @@
         </button>
       </div>
     </section>
+    <main class="recipes [ px-97 container ]">
+      <div class="[ row row-cols-auto gap-3 | mt-4 mb-4 ]">
+        <div class="recipe [ card ]">
+          <img
+            class="[ position-relative | card-img-top ]"
+            src="./assets/images/recettes/Recette01.jpg"
+            alt="Recette01"
+          />
+          <span
+            class="[ badge | position-absolute | rounded-pill | text-bg-primary ]"
+            ><span>10</span>min</span
+          >
+          <div class="[ card-body ]">
+            <h5 class="[ card-title ]">Limonade de Coco</h5>
+            <p class="[ card-text | text-uppercase text-secondary small ]">
+              Recette
+            </p>
+            <p class="[ card-text ]">
+              Mettre les glaçons à votre goût dans le blender, ajouter le lait,
+              la crème de coco, le jus de 2 citrons et le sucre. Mixer jusqu'à
+              avoir la consistence désirée.
+            </p>
+            <p class="[ card-text | text-uppercase text-secondary small ]">
+              Ingrédients
+            </p>
+            <div class="recipe-ingredients [ d-grid row-gap-94 ]">
+              <div>
+                <p class="recipe-ingredient [ fw-medium ]">Lait de coco</p>
+                <p class="ingredient-quantity [ text-secondary ]">400ml</p>
+              </div>
+              <div>
+                <p class="recipe-ingredient">Jus de citron</p>
+                <p class="ingredient-quantity">2</p>
+              </div>
+              <div>
+                <p class="recipe-ingredient">Jus de citron</p>
+                <p class="ingredient-quantity">2</p>
+              </div>
+              <div>
+                <p class="recipe-ingredient">Jus de citron</p>
+                <p class="ingredient-quantity">2</p>
+              </div>
+              <div>
+                <p class="recipe-ingredient"></p>
+                <p class="ingredient-quantity"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
   </body>
 </html>

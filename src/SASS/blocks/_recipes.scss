@@ -1,0 +1,24 @@
+.recipe {
+  padding: 0;
+  width: 23.75rem;
+
+  & img {
+    width: 100%;
+    aspect-ratio: 380 / 253;
+    object-fit: cover;
+  }
+
+  & .badge {
+    top: 1.25rem;
+    right: 1.25rem;
+  }
+}
+
+.recipe-ingredients {
+  grid-template-columns: 1fr 1fr;
+
+  & p {
+    margin: 0;
+    font-size: 0.875rem;
+  }
+}

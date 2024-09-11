@@ -19,6 +19,7 @@ $spacers: (
   91: $spacer * 0.69,
   92: $spacer * 2.19,
   93: $spacer * 3.75,
+  94: $spacer * 1.3125,
   95: $spacer * 4.125,
   96: $spacer * 5.25,
   97: $spacer * 6.25,
@@ -31,6 +32,14 @@ $border-radius-xl: 21px;
 $accordion-button-active-color: inherit;
 $accordion-button-active-bg: none;
 $accordion-icon-active-color: #212529;
+
+$card-spacer-y: 2rem;
+$card-spacer-x: 1.5625rem;
+$card-border-radius: $border-radius-xl;
+
+$badge-padding-x: 0.9375rem;
+$badge-padding-y: 0.3125rem;
+$badge-font-weight: 400;
 
 @import "../../../node_modules/bootstrap/scss/bootstrap";
 

@@ -1,0 +1,156 @@
+<div id="recipe-s-filter" class="filter [ accordion ]">
+  <div class="[ accordion-item ]">
+    <p class="[ accordion-header ]">
+      <button
+        class="[ accordion-button gap-95 | fw-medium ]"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#recipe-s"
+        aria-expanded="true"
+        aria-controls="recipe-s"
+      >
+        Ingrédients
+      </button>
+    </p>
+    <div
+      id="recipe-s"
+      class="[ collapse | accordion-collapse ] show"
+      data-bs-parent="#recipe-s-filter"
+    >
+      <div class="[ accordion-body ]">
+        <div
+          class="filter-search-bar [ input-group | input-group-sm mb-4 border | fs-sm ]"
+        >
+          <input
+            id="recipe--search-input"
+            class="[ form-control ]"
+            type="text"
+            placeholder=""
+            aria-label="filter by recipe-"
+            aria-describedby="recipe--search-button"
+          />
+          <div class="[ d-flex justify-content-center align-items-center ]">
+            <button
+              id="recipe--search-clear"
+              class="filter-search-bar-clear [ btn-close ]"
+              type="button"
+              aria-label="clear"
+            ></button>
+          </div>
+          <button
+            id="recipe--search-button"
+            class="filter-search-bar-button [ btn btn-outline-secondary ]"
+            type="button"
+          >
+            <i class="[ bi bi-search ]"></i>
+          </button>
+        </div>
+
+        <div
+          id="recipe-s-active-criteria"
+          class="filter-active-criteria [ list-group | list-group-flush ]"
+        >
+          <button
+            id="appliance-active-criterion-name"
+            class="[ list-group-item d-flex | list-group-item-action ]"
+            type="button"
+          >
+            active criterion
+            <i class="[ ms-auto | bi bi-x-circle-fill ]"></i>
+          </button>
+        </div>
+        <div
+          id="recipe-s-possible-criteria"
+          class="filter-possible-criteria [ list-group | list-group-flush ]"
+        >
+          <button
+            id="recipe--possible-criterion-name"
+            class="[ list-group-item | list-group-item-action ]"
+            type="button"
+          >
+            possible criterion
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="Ingrédients-accordion" class="filter [ accordion ]">
+  <div class="[ accordion-item ]">
+    <p class="[ accordion-header ]">
+      <button
+        id="Ingrédients-accordion-button"
+        class="[ accordion-button gap-95 | fw-medium ]"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#Ingrédients"
+        aria-expanded="true"
+        aria-controls="Ingrédients"
+      >
+        Ingrédients
+      </button>
+    </p>
+    <div
+      id="Ingrédients"
+      class="[ collapse | accordion-collapse ] show"
+      data-bs-parent="#Ingrédients-filter"
+    >
+      <div class="[ accordion-body ]">
+        <div
+          class="filter-search-bar [ input-group | input-group-sm mb-4 border | fs-sm ]"
+        >
+          <input
+            id="Ingrédient-search-input"
+            class="[ form-control ]"
+            type="text"
+            placeholder=""
+            aria-label="filter by Ingrédient"
+            aria-describedby="Ingrédient-search-button"
+          />
+          <div class="[ d-flex justify-content-center align-items-center ]">
+            <button
+              id="Ingrédient-search-clear"
+              class="filter-search-bar-clear [ btn-close ]"
+              type="button"
+              aria-label="clear"
+            ></button>
+          </div>
+          <button
+            id="Ingrédient-search-button"
+            class="filter-search-bar-button [ btn btn-outline-secondary ]"
+            type="button"
+          >
+            <i class="[ bi bi-search ]"></i>
+          </button>
+        </div>
+
+        <div
+          id="CRITERIONs-active-criteria"
+          class="filter-active-criteria [ list-group | list-group-flush ]"
+        >
+          <button
+            id="appliance-active-criterion-name"
+            class="[ list-group-item d-flex | list-group-item-action ]"
+            type="button"
+          >
+            active criterion
+            <i class="[ ms-auto | bi bi-x-circle-fill ]"></i>
+          </button>
+        </div>
+        <div
+          id="CRITERIONs-possible-criteria"
+          class="filter-possible-criteria [ list-group | list-group-flush ]"
+        >
+          <button
+            id="CRITERION-possible-criterion-name"
+            class="[ list-group-item | list-group-item-action ]"
+            type="button"
+          >
+            possible criterion
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

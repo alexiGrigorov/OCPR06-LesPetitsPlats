@@ -23306,13 +23306,13 @@ header {
   margin-top: 1.5rem !important;
 }
 
-.filter-search-bar > * {
+.filter-searchbar > * {
   border-style: none;
 }
-.filter-search-bar-clear {
+.filter-searchbar-clear {
   font-size: 6px;
 }
-.filter-search-bar-button {
+.filter-searchbar-button {
   --bs-btn-focus-shadow-rgb: 255, 209, 91;
   --bs-btn-active-color: #000;
   --bs-btn-active-bg: #ffd15b;

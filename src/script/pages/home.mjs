@@ -4,6 +4,8 @@ import EventCoordinator from "../events/EventCoordinator.mjs";
 import MainSearchbar from "../components/MainSearchbar.mjs";
 import Filter from "../components/Filter.mjs";
 import ActiveSearchCriteria from "../components/ActiveSearchCriteria.mjs";
+import ResultsCounter from "../components/ResultsCounter.mjs";
+import Gallery from "../components/Gallery.mjs";
 
 class Home {
   #dataProvider;
@@ -26,6 +28,7 @@ class Home {
     this.#recipes = await this.#dataProvider.getRecipes();
     console.log(this.#recipes);
 
+    // instantiation of the different components
     new MainSearchbar(this.#eventCoordinator);
 
     for (const filter in this.#recipes.filters) {
@@ -33,6 +36,10 @@ class Home {
     }
 
     new ActiveSearchCriteria(this.#eventCoordinator);
+
+    new ResultsCounter(this.#eventCoordinator);
+
+    new Gallery(this.#eventCoordinator, this.#recipes.recipes);
 
     // event coordination
     this.#eventCoordinator.subscribe("search-submit", (value) =>
@@ -48,10 +55,18 @@ class Home {
     this.#eventCoordinator.subscribe("filter-remove", (criterion, option) =>
       this.#coordinationOnFilterRemove(criterion, option)
     );
+
+    this.#searchRecipes(this.#recipes.recipes, this.#searchParameters);
+  }
+
+  #searchRecipes(recipes, searchParameters) {
+    const results = recipes.map(() => Math.random() >= 0.5);
+    this.#eventCoordinator.emit("results", results);
   }
 
   #coordinationOnSearchInput(value) {
     this.#searchParameters.search.push(value);
+    this.#searchRecipes(this.#recipes.recipes, this.#searchParameters);
   }
 
   #coordinationOnSearchRemove(value) {
@@ -59,6 +74,7 @@ class Home {
       this.#searchParameters.search.indexOf(value),
       1
     );
+    this.#searchRecipes(this.#recipes.recipes, this.#searchParameters);
   }
 
   #coordinationOnFilterSubmit(criterion, option) {
@@ -73,6 +89,7 @@ class Home {
         this.#searchParameters.ustensil.push(option);
         break;
     }
+    this.#searchRecipes(this.#recipes.recipes, this.#searchParameters);
   }
 
   #coordinationOnFilterRemove(criterion, option) {
@@ -96,6 +113,7 @@ class Home {
         );
         break;
     }
+    this.#searchRecipes(this.#recipes.recipes, this.#searchParameters);
   }
 }
 

@@ -158,7 +158,7 @@
         </template>
         <div class="[ col flex-grow d-flex | ms-auto ]">
           <div class="total-recipes h5 ms-auto">
-            <span id="number-of-recipes">1500</span> recettes
+            <span id="results-counter">1500</span> recettes
           </div>
         </div>
       </div>
@@ -175,24 +175,22 @@
       </div>
     </section>
     <main class="recipes-gallery [ px-97 container ]">
-      <div class="[ row row-cols-auto gap-3 | mt-4 mb-4 ]">
+      <div
+        class="[ row row-cols-auto justify-content-center gap-3 | mt-4 mb-4 ]"
+      >
         <template id="recipe-card-template">
-          <div class="recipe [ card ]">
-            <img
-              class="[ position-relative | card-img-top ]"
-              src="./assets/images/recettes/Recette01.jpg"
-              alt="Recette01"
-            />
+          <div id="recipe-id" class="recipe [ card ]">
+            <img class="[ position-relative | card-img-top ]" src="" alt="" />
             <span
               class="[ badge | position-absolute | rounded-pill | text-bg-primary ]"
-              ><span>10</span>min</span
+              ><span></span>min</span
             >
             <div class="[ card-body ]">
-              <h5 class="[ card-title ]">Limonade de Coco</h5>
+              <h5 class="[ card-title ]"></h5>
               <p class="[ card-text | text-uppercase text-secondary small ]">
                 Recette
               </p>
-              <p class="[ card-text ]">
+              <p class="description [ card-text ]">
                 Mettre les glaçons à votre goût dans le blender, ajouter le
                 lait, la crème de coco, le jus de 2 citrons et le sucre. Mixer
                 jusqu'à avoir la consistence désirée.
@@ -200,78 +198,10 @@
               <p class="[ card-text | text-uppercase text-secondary small ]">
                 Ingrédients
               </p>
-              <div class="recipe-ingredients [ d-grid row-gap-94 ]">
-                <div>
-                  <p class="recipe-ingredient [ fw-medium ]">Lait de coco</p>
-                  <p class="ingredient-quantity [ text-secondary ]">400ml</p>
-                </div>
-                <div>
-                  <p class="recipe-ingredient">Jus de citron</p>
-                  <p class="ingredient-quantity">2</p>
-                </div>
-                <div>
-                  <p class="recipe-ingredient">Jus de citron</p>
-                  <p class="ingredient-quantity">2</p>
-                </div>
-                <div>
-                  <p class="recipe-ingredient">Jus de citron</p>
-                  <p class="ingredient-quantity">2</p>
-                </div>
-                <div>
-                  <p class="recipe-ingredient"></p>
-                  <p class="ingredient-quantity"></p>
-                </div>
-              </div>
+              <div class="recipe-ingredients [ d-grid row-gap-94 ]"></div>
             </div>
           </div>
         </template>
-        <div class="recipe [ card ]">
-          <img
-            class="[ position-relative | card-img-top ]"
-            src="./assets/images/recettes/Recette01.jpg"
-            alt="Recette01"
-          />
-          <span
-            class="[ badge | position-absolute | rounded-pill | text-bg-primary ]"
-            ><span>10</span>min</span
-          >
-          <div class="[ card-body ]">
-            <h5 class="[ card-title ]">Limonade de Coco</h5>
-            <p class="[ card-text | text-uppercase text-secondary small ]">
-              Recette
-            </p>
-            <p class="[ card-text ]">
-              Mettre les glaçons à votre goût dans le blender, ajouter le lait,
-              la crème de coco, le jus de 2 citrons et le sucre. Mixer jusqu'à
-              avoir la consistence désirée.
-            </p>
-            <p class="[ card-text | text-uppercase text-secondary small ]">
-              Ingrédients
-            </p>
-            <div class="recipe-ingredients [ d-grid row-gap-94 ]">
-              <div>
-                <p class="recipe-ingredient [ fw-medium ]">Lait de coco</p>
-                <p class="ingredient-quantity [ text-secondary ]">400ml</p>
-              </div>
-              <div>
-                <p class="recipe-ingredient">Jus de citron</p>
-                <p class="ingredient-quantity">2</p>
-              </div>
-              <div>
-                <p class="recipe-ingredient">Jus de citron</p>
-                <p class="ingredient-quantity">2</p>
-              </div>
-              <div>
-                <p class="recipe-ingredient">Jus de citron</p>
-                <p class="ingredient-quantity">2</p>
-              </div>
-              <div>
-                <p class="recipe-ingredient"></p>
-                <p class="ingredient-quantity"></p>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </main>
   </body>

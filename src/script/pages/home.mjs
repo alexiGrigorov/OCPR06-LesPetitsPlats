@@ -42,8 +42,12 @@ class Home {
     new Gallery(this.#eventCoordinator, this.#recipes.recipes);
 
     // event coordination
-    this.#eventCoordinator.subscribe("search-submit", (value) =>
+    this.#eventCoordinator.subscribe("search-active", (value) =>
       this.#coordinationOnSearchInput(value)
+    );
+
+    this.#eventCoordinator.subscribe("search-submit", (value) =>
+      this.#coordinationOnSearchSubmit(value)
     );
     this.#eventCoordinator.subscribe("search-remove", (value) =>
       this.#coordinationOnSearchRemove(value)
@@ -56,10 +60,17 @@ class Home {
       this.#coordinationOnFilterRemove(criterion, option)
     );
 
-    this.#filterRecipesUsingParameters(
+    const results = this.#filterRecipesUsingParameters(
       this.#recipes.recipes,
       this.#searchParameters
     );
+    const filteredRecipes = this.#getFilteredRecipes(results);
+    this.#eventCoordinator.emit("results", results, filteredRecipes);
+  }
+
+  #searchRecipesUsingInput(recipes, searchInput) {
+    let result = recipes.map(() => true);
+    return result;
   }
 
   #filterRecipesUsingParameters(recipes, searchParameters) {
@@ -103,17 +114,43 @@ class Home {
       );
     });
 
-    const filteredRecipes = recipes.filter((recipe, index) => results[index]);
+    return results;
+  }
+
+  #getFilteredRecipes(filterResults) {
+    return this.#recipes.recipes.filter(
+      (recipe, index) => filterResults[index]
+    );
+  }
+
+  #coordinationOnSearchInput(value) {
+    const filterUsingSearchInput = this.#searchRecipesUsingInput(
+      this.#recipes.recipes,
+      value
+    );
+
+    const filterUsingParameters = this.#filterRecipesUsingParameters(
+      this.#recipes.recipes,
+      this.#searchParameters
+    );
+
+    const results = filterUsingSearchInput.map(
+      (result, index) => result && filterUsingParameters[0][index]
+    );
+    const filteredRecipes = this.#getFilteredRecipes(results);
 
     this.#eventCoordinator.emit("results", results, filteredRecipes);
   }
 
-  #coordinationOnSearchInput(value) {
+  #coordinationOnSearchSubmit(value) {
     this.#searchParameters.search.push(value);
-    this.#filterRecipesUsingParameters(
+
+    const results = this.#filterRecipesUsingParameters(
       this.#recipes.recipes,
       this.#searchParameters
     );
+    const filteredRecipes = this.#getFilteredRecipes(results);
+    this.#eventCoordinator.emit("results", results, filteredRecipes);
   }
 
   #coordinationOnSearchRemove(value) {
@@ -121,18 +158,22 @@ class Home {
       this.#searchParameters.search.indexOf(value),
       1
     );
-    this.#filterRecipesUsingParameters(
+    const results = this.#filterRecipesUsingParameters(
       this.#recipes.recipes,
       this.#searchParameters
     );
+    const filteredRecipes = this.#getFilteredRecipes(results);
+    this.#eventCoordinator.emit("results", results, filteredRecipes);
   }
 
   #coordinationOnFilterSubmit(criterion, option) {
     this.#searchParameters[criterion].push(option);
-    this.#filterRecipesUsingParameters(
+    const results = this.#filterRecipesUsingParameters(
       this.#recipes.recipes,
       this.#searchParameters
     );
+    const filteredRecipes = this.#getFilteredRecipes(results);
+    this.#eventCoordinator.emit("results", results, filteredRecipes);
   }
 
   #coordinationOnFilterRemove(criterion, option) {
@@ -140,10 +181,12 @@ class Home {
       this.#searchParameters[criterion].indexOf(option),
       1
     );
-    this.#filterRecipesUsingParameters(
+    const results = this.#filterRecipesUsingParameters(
       this.#recipes.recipes,
       this.#searchParameters
     );
+    const filteredRecipes = this.#getFilteredRecipes(results);
+    this.#eventCoordinator.emit("results", results, filteredRecipes);
   }
 }
 

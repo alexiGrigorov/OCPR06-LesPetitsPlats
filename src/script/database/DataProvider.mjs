@@ -28,7 +28,7 @@ export default class DataProvider {
   async getRecipes() {
     let result = {
       recipes: [],
-      filters: { Ingrédients: [], Appareils: [], Ustensiles: [] },
+      filters: { Ingrédients: [], Appareil: [], Ustensiles: [] },
     };
 
     const data = await this.#downloadData();
@@ -37,16 +37,16 @@ export default class DataProvider {
 
     result.filters.Ingrédients = extractUniqueValues(
       result.recipes,
-      "ingredients"
+      "Ingrédients"
     );
     orderAlphabetically(result.filters.Ingrédients);
 
-    result.filters.Appareils = extractUniqueValues(result.recipes, "appliance");
-    orderAlphabetically(result.filters.Appareils);
+    result.filters.Appareil = extractUniqueValues(result.recipes, "Appareil");
+    orderAlphabetically(result.filters.Appareil);
 
     result.filters.Ustensiles = extractUniqueValues(
       result.recipes,
-      "ustensils"
+      "Ustensiles"
     );
     orderAlphabetically(result.filters.Ustensiles);
 

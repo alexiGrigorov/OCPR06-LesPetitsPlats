@@ -14,9 +14,9 @@ class Home {
   #recipes;
   #searchParameters = {
     search: [],
-    ingredient: [],
-    appliance: [],
-    ustensil: [],
+    Ingrédients: [],
+    Appareil: [],
+    Ustensiles: [],
   };
 
   constructor() {
@@ -56,17 +56,64 @@ class Home {
       this.#coordinationOnFilterRemove(criterion, option)
     );
 
-    this.#searchRecipes(this.#recipes.recipes, this.#searchParameters);
+    this.#filterRecipesUsingParameters(
+      this.#recipes.recipes,
+      this.#searchParameters
+    );
   }
 
-  #searchRecipes(recipes, searchParameters) {
-    const results = recipes.map(() => Math.random() >= 0.5);
-    this.#eventCoordinator.emit("results", results);
+  #filterRecipesUsingParameters(recipes, searchParameters) {
+    const results = recipes.map((recipe) => {
+      const foundSearch = searchParameters.search.every((search) => {
+        const foundInTitle = recipe.name
+          .toLowerCase()
+          .includes(search.toLowerCase());
+        const foundInDescription = recipe.description
+          .toLowerCase()
+          .includes(search.toLowerCase());
+        const foundInIngredients = recipe.Ingrédients.some((ingredient) =>
+          ingredient.Ingrédient.toLowerCase().includes(search.toLowerCase())
+        );
+
+        return foundInTitle || foundInDescription || foundInIngredients;
+      });
+
+      const recipeIngredients = recipe.Ingrédients.map((ingredient) =>
+        ingredient.Ingrédient.toLowerCase()
+      );
+      const recipeAppliance = recipe.Appareil.toLowerCase();
+      const recipeUstensils = recipe.Ustensiles.map((ustensil) =>
+        ustensil.toLowerCase()
+      );
+
+      const foundIngredients = searchParameters.Ingrédients.every(
+        (ingredient) => {
+          return recipeIngredients.includes(ingredient.toLowerCase());
+        }
+      );
+      const foundAppliance = searchParameters.Appareil.every((appliance) => {
+        return recipeAppliance.includes(appliance.toLowerCase());
+      });
+      const foundUstensils = searchParameters.Ustensiles.every((ustensil) => {
+        return recipeUstensils.includes(ustensil.toLowerCase());
+      });
+
+      return (
+        foundSearch && foundIngredients && foundAppliance && foundUstensils
+      );
+    });
+
+    const filteredRecipes = recipes.filter((recipe, index) => results[index]);
+
+    this.#eventCoordinator.emit("results", results, filteredRecipes);
   }
 
   #coordinationOnSearchInput(value) {
     this.#searchParameters.search.push(value);
-    this.#searchRecipes(this.#recipes.recipes, this.#searchParameters);
+    this.#filterRecipesUsingParameters(
+      this.#recipes.recipes,
+      this.#searchParameters
+    );
   }
 
   #coordinationOnSearchRemove(value) {
@@ -74,46 +121,29 @@ class Home {
       this.#searchParameters.search.indexOf(value),
       1
     );
-    this.#searchRecipes(this.#recipes.recipes, this.#searchParameters);
+    this.#filterRecipesUsingParameters(
+      this.#recipes.recipes,
+      this.#searchParameters
+    );
   }
 
   #coordinationOnFilterSubmit(criterion, option) {
-    switch (criterion) {
-      case "Ingrédients":
-        this.#searchParameters.ingredient.push(option);
-        break;
-      case "Appareils":
-        this.#searchParameters.appliance.push(option);
-        break;
-      case "Ustensiles":
-        this.#searchParameters.ustensil.push(option);
-        break;
-    }
-    this.#searchRecipes(this.#recipes.recipes, this.#searchParameters);
+    this.#searchParameters[criterion].push(option);
+    this.#filterRecipesUsingParameters(
+      this.#recipes.recipes,
+      this.#searchParameters
+    );
   }
 
   #coordinationOnFilterRemove(criterion, option) {
-    switch (criterion) {
-      case "Ingrédients":
-        this.#searchParameters.ingredient.splice(
-          this.#searchParameters.ingredient.indexOf(option),
-          1
-        );
-        break;
-      case "Appareils":
-        this.#searchParameters.appliance.splice(
-          this.#searchParameters.appliance.indexOf(option),
-          1
-        );
-        break;
-      case "Ustensiles":
-        this.#searchParameters.ustensil.splice(
-          this.#searchParameters.ustensil.indexOf(option),
-          1
-        );
-        break;
-    }
-    this.#searchRecipes(this.#recipes.recipes, this.#searchParameters);
+    this.#searchParameters[criterion].splice(
+      this.#searchParameters[criterion].indexOf(option),
+      1
+    );
+    this.#filterRecipesUsingParameters(
+      this.#recipes.recipes,
+      this.#searchParameters
+    );
   }
 }
 

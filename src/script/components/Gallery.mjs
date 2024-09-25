@@ -39,7 +39,7 @@ export default class Gallery {
     recipeDescription.textContent = recipe.description;
 
     const recipeIngredients = result.querySelector(".recipe-ingredients");
-    recipe.ingredients.forEach((element) => {
+    recipe.Ingrédients.forEach((element) => {
       const divWrapper = document.createElement("div");
 
       const ingredient = document.createElement("p");

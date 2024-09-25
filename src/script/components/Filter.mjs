@@ -98,6 +98,58 @@ export default class FilterTemplate {
       this.#possibleCriteriaList.children[id].classList.remove("d-none");
     });
 
+    this.#eventCoordinator.subscribe(`results`, (results, filteredRecipes) => {
+      const filteredOptions = extractUniqueValues(
+        filteredRecipes,
+        this.#criterion
+      );
+
+      const possibleCriteria = Array.from(this.#possibleCriteriaList.children);
+      const filteredPossibleCriteria = possibleCriteria.filter(
+        (possibleCriteriaButton) =>
+          filteredOptions.includes(possibleCriteriaButton.innerText)
+      );
+
+      possibleCriteria.forEach((possibleCriterion) => {
+        if (!filteredPossibleCriteria.includes(possibleCriterion)) {
+          possibleCriterion.dataset.filteredOption = "true";
+          possibleCriterion.classList.add("d-none");
+        }
+        if (filteredPossibleCriteria.includes(possibleCriterion)) {
+          possibleCriterion.dataset.filteredOption = "false";
+          possibleCriterion.classList.remove("d-none");
+        }
+      });
+
+      function extractUniqueValues(array, key) {
+        if (!Array.isArray(array) || array.length === 0) return [];
+
+        const firstItem = array[0][key];
+
+        if (typeof firstItem === "string") {
+          return [...new Set(array.map((item) => item[key]))];
+        }
+
+        if (Array.isArray(firstItem) && typeof firstItem[0] === "string") {
+          return [...new Set(array.flatMap((item) => item[key]))];
+        }
+
+        if (Array.isArray(firstItem) && typeof firstItem[0] === "object") {
+          return [
+            ...new Set(
+              array.flatMap((item) =>
+                item[key].map(
+                  (subItem) => subItem[key.substring(0, key.length - 1)]
+                )
+              )
+            ),
+          ];
+        }
+
+        return [];
+      }
+    });
+
     function customizeTemplateUsingCriterion(criterion) {
       const result = FilterTemplate.#accordionTemplate.content.cloneNode(true);
 
@@ -236,6 +288,7 @@ export default class FilterTemplate {
 
   #coordinationOnClearButtonClick() {
     Array.from(this.#possibleCriteriaList.children).forEach((option) => {
+      if (option.dataset.filteredOption === "true") return;
       option.classList.remove("d-none");
     });
   }

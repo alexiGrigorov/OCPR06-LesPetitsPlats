@@ -4,18 +4,17 @@ export default class DataModelRecipe {
     this.img = `https://raw.githubusercontent.com/alexiGrigorov/OCPR06-LesPetitsPlats/main/assets/images/recettes/${rawData.image}`;
     this.name = rawData.name;
     this.servings = rawData.servings;
-    this.ingredients = rawData.ingredients.map((ingredient) => {
+    this.Ingrédients = rawData.ingredients.map((ingredient) => {
       return {
-        ingredient: this.#capitalizeFirstLetter(ingredient.ingredient),
+        Ingrédient: this.#capitalizeFirstLetter(ingredient.ingredient),
         quantity: ingredient.quantity ? ingredient.quantity : "",
         unit: ingredient.unit ? ingredient.unit : "",
       };
     });
     this.time = rawData.time;
     this.description = rawData.description;
-    this.appliance = this.#capitalizeFirstLetter(rawData.appliance);
-    this.appliance = rawData.appliance;
-    this.ustensils = rawData.ustensils.map((ustensil) =>
+    this.Appareil = this.#capitalizeFirstLetter(rawData.appliance);
+    this.Ustensiles = rawData.ustensils.map((ustensil) =>
       this.#capitalizeFirstLetter(ustensil)
     );
   }

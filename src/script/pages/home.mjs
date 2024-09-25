@@ -72,18 +72,28 @@ class Home {
   }
 
   #searchRecipesUsingInput(recipes, searchInput) {
-    const result = recipes.map((recipe) => {
-      const foundInTitle = recipe.name
-        .toLowerCase()
-        .includes(searchInput.toLowerCase());
-      const foundInDescription = recipe.description
-        .toLowerCase()
-        .includes(searchInput.toLowerCase());
-      const foundInIngredients = recipe.Ingrédients.some((ingredient) =>
-        ingredient.Ingrédient.toLowerCase().includes(searchInput.toLowerCase())
+    const result = [];
+    const searchPattern = new RegExp(searchInput.toLowerCase(), "i");
+
+    for (let i = 0; i < recipes.length; i++) {
+      const recipe = recipes[i];
+      const foundInTitle = searchPattern.test(recipe.name.toLowerCase());
+      const foundInDescription = searchPattern.test(
+        recipe.description.toLowerCase()
       );
-      return foundInTitle || foundInDescription || foundInIngredients;
-    });
+      let foundInIngredients = false;
+
+      for (let j = 0; j < recipe.Ingrédients.length; j++) {
+        if (
+          searchPattern.test(recipe.Ingrédients[j].Ingrédient.toLowerCase())
+        ) {
+          foundInIngredients = true;
+          break;
+        }
+      }
+
+      result.push(foundInTitle || foundInDescription || foundInIngredients);
+    }
 
     return result;
   }

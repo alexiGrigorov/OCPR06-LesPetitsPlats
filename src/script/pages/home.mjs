@@ -26,7 +26,6 @@ class Home {
 
   async init() {
     this.#recipes = await this.#dataProvider.getRecipes();
-    console.log(this.#recipes);
 
     // instantiation of the different components
     new MainSearchbar(this.#eventCoordinator);
@@ -44,6 +43,10 @@ class Home {
     // event coordination
     this.#eventCoordinator.subscribe("search-active", (value) =>
       this.#coordinationOnSearchInput(value)
+    );
+
+    this.#eventCoordinator.subscribe("search-clear", () =>
+      this.#coordinationOnSearchClear()
     );
 
     this.#eventCoordinator.subscribe("search-submit", (value) =>
@@ -69,26 +72,24 @@ class Home {
   }
 
   #searchRecipesUsingInput(recipes, searchInput) {
-    let result = recipes.map(() => true);
+    const result = recipes.map((recipe) => {
+      const foundInTitle = recipe.name
+        .toLowerCase()
+        .includes(searchInput.toLowerCase());
+      const foundInDescription = recipe.description
+        .toLowerCase()
+        .includes(searchInput.toLowerCase());
+      const foundInIngredients = recipe.Ingrédients.some((ingredient) =>
+        ingredient.Ingrédient.toLowerCase().includes(searchInput.toLowerCase())
+      );
+      return foundInTitle || foundInDescription || foundInIngredients;
+    });
+
     return result;
   }
 
   #filterRecipesUsingParameters(recipes, searchParameters) {
-    const results = recipes.map((recipe) => {
-      const foundSearch = searchParameters.search.every((search) => {
-        const foundInTitle = recipe.name
-          .toLowerCase()
-          .includes(search.toLowerCase());
-        const foundInDescription = recipe.description
-          .toLowerCase()
-          .includes(search.toLowerCase());
-        const foundInIngredients = recipe.Ingrédients.some((ingredient) =>
-          ingredient.Ingrédient.toLowerCase().includes(search.toLowerCase())
-        );
-
-        return foundInTitle || foundInDescription || foundInIngredients;
-      });
-
+    const filtrationResults = recipes.map((recipe) => {
       const recipeIngredients = recipe.Ingrédients.map((ingredient) =>
         ingredient.Ingrédient.toLowerCase()
       );
@@ -109,10 +110,23 @@ class Home {
         return recipeUstensils.includes(ustensil.toLowerCase());
       });
 
-      return (
-        foundSearch && foundIngredients && foundAppliance && foundUstensils
-      );
+      return foundIngredients && foundAppliance && foundUstensils;
     });
+
+    let searchResults = recipes.map(() => true);
+
+    if (searchParameters.search.length > 0) {
+      searchResults = searchParameters.search.map((search) =>
+        this.#searchRecipesUsingInput(recipes, search)
+      );
+      searchResults = searchResults.reduce((acc, curr) => {
+        return acc.map((val, index) => val && curr[index]);
+      });
+    }
+
+    const results = searchResults.map(
+      (searchResult, index) => searchResult && filtrationResults[index]
+    );
 
     return results;
   }
@@ -135,10 +149,19 @@ class Home {
     );
 
     const results = filterUsingSearchInput.map(
-      (result, index) => result && filterUsingParameters[0][index]
+      (result, index) => result && filterUsingParameters[index]
     );
     const filteredRecipes = this.#getFilteredRecipes(results);
 
+    this.#eventCoordinator.emit("results", results, filteredRecipes);
+  }
+
+  #coordinationOnSearchClear() {
+    const results = this.#filterRecipesUsingParameters(
+      this.#recipes.recipes,
+      this.#searchParameters
+    );
+    const filteredRecipes = this.#getFilteredRecipes(results);
     this.#eventCoordinator.emit("results", results, filteredRecipes);
   }
 

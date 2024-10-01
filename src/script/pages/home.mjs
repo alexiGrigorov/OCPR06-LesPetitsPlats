@@ -6,6 +6,7 @@ import Filter from "../components/Filter.mjs";
 import ActiveSearchCriteria from "../components/ActiveSearchCriteria.mjs";
 import ResultsCounter from "../components/ResultsCounter.mjs";
 import Gallery from "../components/Gallery.mjs";
+import SearchAlert from "../components/SearchAlert.mjs";
 
 class Home {
   #dataProvider;
@@ -39,6 +40,8 @@ class Home {
     new ResultsCounter(this.#eventCoordinator);
 
     new Gallery(this.#eventCoordinator, this.#recipes.recipes);
+
+    new SearchAlert(this.#eventCoordinator);
 
     // event coordination
     this.#eventCoordinator.subscribe("search-active", (value) =>

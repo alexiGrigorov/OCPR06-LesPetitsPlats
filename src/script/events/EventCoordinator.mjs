@@ -10,7 +10,7 @@ export default class EventCoordinator {
   }
 
   emit(eventName, ...args) {
-    console.log(eventName, args);
+    // console.log(eventName, args);
     const event = this.#events[eventName];
     if (event) {
       event.forEach((callback) => {

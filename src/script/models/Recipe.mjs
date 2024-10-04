@@ -1,7 +1,11 @@
 export default class DataModelRecipe {
   constructor(rawData) {
     this.id = rawData.id;
-    this.img = `https://raw.githubusercontent.com/alexiGrigorov/OCPR06-LesPetitsPlats/main/assets/images/recettes/${rawData.image}`;
+    // this.img = `https://raw.githubusercontent.com/alexiGrigorov/OCPR06-LesPetitsPlats/main/assets/images/recettes/${rawData.image}`;
+    this.img = `https://raw.githubusercontent.com/alexiGrigorov/OCPR06-LesPetitsPlats/main/assets/images/recettes/thumbnails/${rawData.image.slice(
+      0,
+      -4
+    )}.webp`;
     this.name = rawData.name;
     this.servings = rawData.servings;
     this.Ingrédients = rawData.ingredients.map((ingredient) => {
